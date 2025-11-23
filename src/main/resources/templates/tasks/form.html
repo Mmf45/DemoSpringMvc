@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle != null ? pageTitle : 'Formulaire de tâche'}">Formulaire de tâche</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">
+                <i class="bi bi-check2-square"></i> To-Do App
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">
+                            <i class="bi bi-house"></i> Accueil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/tasks}">
+                            <i class="bi bi-list-task"></i> Mes Tâches
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/tasks/new}">
+                            <i class="bi bi-plus-circle"></i> Nouvelle Tâche
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- Page Header -->
+                <div class="mb-4">
+                    <h2>
+                        <i th:class="${isEdit} ? 'bi bi-pencil text-warning' : 'bi bi-plus-circle text-success'"></i>
+                        <span th:text="${pageTitle}">Formulaire de tâche</span>
+                    </h2>
+                    <p class="text-muted" th:text="${isEdit} ? 'Modifiez les informations de la tâche' : 'Créez une nouvelle tâche'">
+                        Description du formulaire
+                    </p>
+                </div>
+                
+                <!-- Task Form -->
+                <div class="card">
+                    <div class="card-body">
+                        <form th:action="${isEdit} ? @{/tasks/{id}(id=${task.id})} : @{/tasks}" 
+                              th:object="${task}" 
+                              method="post">
+                            
+                            <!-- Title Field -->
+                            <div class="mb-3">
+                                <label for="title" class="form-label">
+                                    <i class="bi bi-card-text"></i> Titre de la tâche *
+                                </label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="title" 
+                                       th:field="*{title}" 
+                                       placeholder="Ex: Préparer l'exposé Spring MVC"
+                                       required>
+                                <div class="form-text">
+                                    Donnez un titre clair et concis à votre tâche
+                                </div>
+                            </div>
+                            
+                            <!-- Description Field -->
+                            <div class="mb-3">
+                                <label for="description" class="form-label">
+                                    <i class="bi bi-text-paragraph"></i> Description
+                                </label>
+                                <textarea class="form-control" 
+                                          id="description" 
+                                          th:field="*{description}" 
+                                          rows="5"
+                                          placeholder="Décrivez en détail votre tâche..."></textarea>
+                                <div class="form-text">
+                                    Ajoutez des détails supplémentaires sur la tâche (optionnel)
+                                </div>
+                            </div>
+                            
+                            <!-- Completed Checkbox (only for edit mode) -->
+                            <div class="mb-3" th:if="${isEdit}">
+                                <div class="form-check">
+                                    <input class="form-check-input" 
+                                           type="checkbox" 
+                                           id="completed" 
+                                           th:field="*{completed}">
+                                    <label class="form-check-label" for="completed">
+                                        <i class="bi bi-check-square"></i> Marquer comme terminée
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Form Actions -->
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <a th:href="@{/tasks}" class="btn btn-outline-secondary">
+                                    <i class="bi bi-x-circle"></i> Annuler
+                                </a>
+                                <button type="submit" class="btn" 
+                                        th:classappend="${isEdit} ? 'btn-warning' : 'btn-success'">
+                                    <i th:class="${isEdit} ? 'bi bi-save' : 'bi bi-plus-circle'"></i>
+                                    <span th:text="${isEdit} ? 'Mettre à jour' : 'Créer la tâche'"></span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Info Box -->
+                <div class="alert alert-info mt-4" role="alert">
+                    <i class="bi bi-info-circle"></i> 
+                    <strong>Astuce :</strong> 
+                    Les champs marqués d'une étoile (*) sont obligatoires.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer mt-5 py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">Application de démonstration Spring MVC - To-Do App</span>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - To-Do App</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">
+                <i class="bi bi-check2-square"></i> To-Do App
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/}">
+                            <i class="bi bi-house"></i> Accueil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/tasks}">
+                            <i class="bi bi-list-task"></i> Mes Tâches
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/tasks/new}">
+                            <i class="bi bi-plus-circle"></i> Nouvelle Tâche
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="jumbotron text-center py-5">
+            <h1 class="display-4">
+                <i class="bi bi-check2-square text-primary"></i>
+                <span th:text="${welcomeMessage}">Bienvenue</span>
+            </h1>
+            <p class="lead" th:text="${description}">Application de démonstration</p>
+            <hr class="my-4">
+            <p class="text-muted">
+                Cette application démontre les concepts fondamentaux de Spring MVC : 
+                Contrôleurs, Modèles, Vues et leur interaction.
+            </p>
+            <div class="mt-4">
+                <a class="btn btn-primary btn-lg me-2" th:href="@{/tasks}" role="button">
+                    <i class="bi bi-list-task"></i> Voir mes tâches
+                </a>
+                <a class="btn btn-success btn-lg" th:href="@{/tasks/new}" role="button">
+                    <i class="bi bi-plus-circle"></i> Créer une tâche
+                </a>
+            </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="bi bi-code-square display-4 text-primary"></i>
+                        <h5 class="card-title mt-3">Architecture MVC</h5>
+                        <p class="card-text">
+                            Séparation claire entre Modèle, Vue et Contrôleur pour une architecture maintenable.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="bi bi-gear-fill display-4 text-success"></i>
+                        <h5 class="card-title mt-3">Contrôleurs Spring</h5>
+                        <p class="card-text">
+                            Utilisation des annotations @Controller, @GetMapping, @PostMapping pour gérer les requêtes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="bi bi-eye-fill display-4 text-info"></i>
+                        <h5 class="card-title mt-3">Templates Thymeleaf</h5>
+                        <p class="card-text">
+                            Vues dynamiques avec Thymeleaf pour un rendu côté serveur moderne et élégant.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- About Section -->
+        <div class="card mt-5">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="bi bi-info-circle"></i> À propos de cette application</h5>
+            </div>
+            <div class="card-body">
+                <h6>Concepts démontrés :</h6>
+                <ul class="list-unstyled">
+                    <li><i class="bi bi-check text-success"></i> <strong>Modèle (Model)</strong> : Classe Task représentant les données</li>
+                    <li><i class="bi bi-check text-success"></i> <strong>Vue (View)</strong> : Templates Thymeleaf pour l'affichage</li>
+                    <li><i class="bi bi-check text-success"></i> <strong>Contrôleur (Controller)</strong> : HomeController et TaskController</li>
+                    <li><i class="bi bi-check text-success"></i> <strong>Service Layer</strong> : TaskService pour la logique métier</li>
+                    <li><i class="bi bi-check text-success"></i> <strong>Injection de dépendances</strong> : @Autowired</li>
+                    <li><i class="bi bi-check text-success"></i> <strong>Mapping d'URL</strong> : @GetMapping, @PostMapping, @PathVariable</li>
+                    <li><i class="bi bi-check text-success"></i> <strong>Binding de données</strong> : @ModelAttribute</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer mt-5 py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">Application de démonstration Spring MVC - To-Do App © 2025</span>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

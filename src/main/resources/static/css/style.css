@@ -1,0 +1,137 @@
+/* Custom styles for To-Do App */
+
+/* Body and Layout */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+}
+
+/* Footer */
+.footer {
+    margin-top: auto;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Cards */
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar */
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+    transition: all 0.3s ease;
+}
+
+/* Jumbotron (Hero Section) */
+.jumbotron {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-size: cover;
+    border-radius: 10px;
+    color: white;
+    padding: 3rem 2rem;
+}
+
+.jumbotron .display-4 {
+    font-weight: 700;
+}
+
+.jumbotron .lead {
+    font-size: 1.5rem;
+}
+
+.jumbotron hr {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.jumbotron .text-muted {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Task Cards */
+.card.border-success {
+    border-width: 2px;
+}
+
+.card.border-primary {
+    border-width: 2px;
+}
+
+/* Badges */
+.badge {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+}
+
+/* Alert animations */
+.alert {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Form styling */
+.form-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Icons */
+i {
+    vertical-align: middle;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .jumbotron {
+        padding: 2rem 1rem;
+    }
+    
+    .jumbotron .display-4 {
+        font-size: 2rem;
+    }
+    
+    .jumbotron .lead {
+        font-size: 1.1rem;
+    }
+}
+
+/* Empty state */
+.text-center .display-1 {
+    font-size: 5rem;
+    opacity: 0.5;
+}
+
+/* Task completion styling */
+.text-decoration-line-through {
+    opacity: 0.6;
+}
