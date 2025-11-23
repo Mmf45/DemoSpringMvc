@@ -79,7 +79,7 @@ public class Task {
     }
     
     public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = LocalDateTime.now();
+        this.updatedAt = updatedAt;
     }
     
     @Override
