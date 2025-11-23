@@ -31,8 +31,13 @@ body {
    ============================================ */
 .navbar {
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    backdrop-filter: blur(10px);
     transition: var(--transition-smooth);
+}
+
+@supports (backdrop-filter: blur(10px)) {
+    .navbar {
+        backdrop-filter: blur(10px);
+    }
 }
 
 .navbar-brand {
@@ -104,6 +109,16 @@ body {
 @keyframes rotate {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .jumbotron {
+        animation: none;
+    }
+    
+    .jumbotron::before {
+        animation: none;
+    }
 }
 
 .jumbotron .display-4 {
@@ -210,8 +225,8 @@ body {
 }
 
 .btn:hover::before {
-    width: 300px;
-    height: 300px;
+    width: 200%;
+    height: 200%;
 }
 
 .btn:active {
@@ -399,6 +414,12 @@ i {
     50% { transform: translateY(-20px); }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .text-center .display-1 {
+        animation: none;
+    }
+}
+
 /* ============================================
    TASK COMPLETION STYLING
    ============================================ */
@@ -479,15 +500,26 @@ i {
 /* ============================================
    ACCESSIBILITY ENHANCEMENTS
    ============================================ */
-*:focus {
-    outline: 2px solid #667eea;
-    outline-offset: 2px;
-}
-
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
     outline: 3px solid #667eea;
     outline-offset: 3px;
+}
+
+/* ============================================
+   REDUCED MOTION PREFERENCES
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
 /* ============================================
