@@ -1,6 +1,8 @@
 # Application To-Do - Démonstration Spring MVC
 
-![Home Page](https://github.com/user-attachments/assets/f12e60bd-e3bb-4df7-a048-c9b1e9554031)
+![Home Page]
+<img width="1904" height="912" alt="image" src="https://github.com/user-attachments/assets/5d2025ce-c6fd-4065-a22e-7580503ab94a" />
+
 
 ## 📋 Description
 
