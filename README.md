@@ -143,16 +143,20 @@ L'application offre les opérations CRUD complètes :
 ## 📸 Captures d'écran
 
 ### Page d'accueil
-![Home Page](https://github.com/user-attachments/assets/f12e60bd-e3bb-4df7-a048-c9b1e9554031)
+![Home Page]<img width="1902" height="914" alt="image" src="https://github.com/user-attachments/assets/0873a60d-ab8e-4654-9793-bc63301ad261" />
+
 
 ### Liste des tâches
-![Tasks List](https://github.com/user-attachments/assets/b2f39b3f-5b17-49f6-bd49-2af5cf9b09ab)
+![Tasks List]<img width="1919" height="916" alt="Capture d&#39;écran 2025-11-23 171425" src="https://github.com/user-attachments/assets/521c9bf3-66f7-43ec-b922-2889b0aac138" />
+
 
 ### Formulaire de création
-![Create Task](https://github.com/user-attachments/assets/7427e597-8a9c-408d-9c92-f0becfddd0e1)
+![Create Task]<img width="1900" height="919" alt="Capture d&#39;écran 2025-11-23 171526" src="https://github.com/user-attachments/assets/afd69d06-cb0e-480e-98b0-1e58075fa78e" />
+
 
 ### Détails d'une tâche
-![Task Details](https://github.com/user-attachments/assets/53eca10a-0cf3-43de-a524-ba4efb56a5f6)
+![Task Details]<img width="1903" height="908" alt="Capture d&#39;écran 2025-11-23 171608" src="https://github.com/user-attachments/assets/a4044a21-e545-42a8-aee5-9b3e85dd7a87" />
+
 
 ## 🛠️ Technologies utilisées
 
