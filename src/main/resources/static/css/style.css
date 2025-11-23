@@ -1,91 +1,335 @@
 /* Custom styles for To-Do App */
 
+/* ============================================
+   GLOBAL STYLES & VARIABLES
+   ============================================ */
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --card-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.18);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-radius: 12px;
+}
+
 /* Body and Layout */
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 .container {
     flex: 1;
 }
 
-/* Footer */
-.footer {
-    margin-top: auto;
-    border-top: 1px solid #dee2e6;
+/* ============================================
+   NAVIGATION BAR ENHANCEMENTS
+   ============================================ */
+.navbar {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: var(--transition-smooth);
 }
 
-/* Cards */
-.card {
-    transition: transform 0.2s, box-shadow 0.2s;
+@supports (backdrop-filter: blur(10px)) {
+    .navbar {
+        backdrop-filter: blur(10px);
+    }
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Navbar */
 .navbar-brand {
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 700;
+    transition: var(--transition-smooth);
+    letter-spacing: -0.5px;
 }
 
-/* Buttons */
-.btn {
-    transition: all 0.3s ease;
+.navbar-brand:hover {
+    transform: scale(1.05);
 }
 
-/* Jumbotron (Hero Section) */
+.nav-link {
+    font-weight: 500;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: var(--transition-smooth);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 80%;
+}
+
+/* ============================================
+   HERO SECTION (JUMBOTRON)
+   ============================================ */
 .jumbotron {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    background-size: cover;
-    border-radius: 10px;
+    background: var(--primary-gradient);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+    border-radius: var(--border-radius);
     color: white;
-    padding: 3rem 2rem;
+    padding: 4rem 2rem;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.jumbotron::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .jumbotron {
+        animation: none;
+    }
+    
+    .jumbotron::before {
+        animation: none;
+    }
 }
 
 .jumbotron .display-4 {
-    font-weight: 700;
+    font-weight: 800;
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .jumbotron .lead {
     font-size: 1.5rem;
+    position: relative;
+    z-index: 1;
+    font-weight: 300;
 }
 
 .jumbotron hr {
     border-color: rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 1;
 }
 
 .jumbotron .text-muted {
-    color: rgba(255, 255, 255, 0.8) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    position: relative;
+    z-index: 1;
 }
 
-/* Task Cards */
+.jumbotron .btn {
+    position: relative;
+    z-index: 1;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   CARDS & TASK CARDS
+   ============================================ */
+.card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: var(--transition-smooth);
+    overflow: hidden;
+    background: white;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.card-header {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-bottom: none;
+    font-weight: 600;
+}
+
+.card-footer {
+    background: rgba(248, 249, 250, 0.5);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Task Cards with Status */
 .card.border-success {
-    border-width: 2px;
+    border-left: 4px solid #28a745 !important;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
 }
 
 .card.border-primary {
-    border-width: 2px;
+    border-left: 4px solid #007bff !important;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
 }
 
-/* Badges */
+/* ============================================
+   BUTTONS & INTERACTIVE ELEMENTS
+   ============================================ */
+.btn {
+    transition: var(--transition-smooth);
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 0.5rem 1.25rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 200%;
+    height: 200%;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    border: none;
+    box-shadow: 0 4px 12px rgba(56, 239, 125, 0.3);
+}
+
+.btn-success:hover {
+    box-shadow: 0 6px 16px rgba(56, 239, 125, 0.4);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border: none;
+    box-shadow: 0 4px 12px rgba(240, 147, 251, 0.3);
+    color: white;
+}
+
+.btn-warning:hover {
+    box-shadow: 0 6px 16px rgba(240, 147, 251, 0.4);
+}
+
+/* Outline buttons with enhanced hover */
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-success,
+.btn-outline-warning,
+.btn-outline-danger {
+    border-width: 2px;
+    font-weight: 600;
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary-gradient);
+    border-color: transparent;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   BADGES
+   ============================================ */
 .badge {
     font-size: 0.85rem;
     padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
-/* Alert animations */
+.badge.bg-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%) !important;
+    box-shadow: 0 2px 8px rgba(56, 239, 125, 0.3);
+}
+
+.badge.bg-warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+    box-shadow: 0 2px 8px rgba(240, 147, 251, 0.3);
+}
+
+/* ============================================
+   ALERTS & NOTIFICATIONS
+   ============================================ */
 .alert {
-    animation: slideIn 0.3s ease-out;
+    animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    border-left: 4px solid;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, rgba(17, 153, 142, 0.1) 0%, rgba(56, 239, 125, 0.1) 100%);
+    border-left-color: #38ef7d;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, rgba(240, 147, 251, 0.1) 0%, rgba(245, 87, 108, 0.1) 100%);
+    border-left-color: #f5576c;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-left-color: #667eea;
 }
 
 @keyframes slideIn {
     from {
-        transform: translateY(-20px);
+        transform: translateY(-30px);
         opacity: 0;
     }
     to {
@@ -94,26 +338,134 @@ body {
     }
 }
 
-/* Form styling */
+/* ============================================
+   FORM STYLING
+   ============================================ */
 .form-label {
     font-weight: 600;
     color: #495057;
+    margin-bottom: 0.75rem;
 }
 
-.form-control:focus {
+.form-control,
+.form-select {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    transition: var(--transition-smooth);
+    font-size: 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
     border-color: #667eea;
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.15);
+    transform: translateY(-2px);
 }
 
-/* Icons */
+.form-control::placeholder {
+    color: #adb5bd;
+    font-style: italic;
+}
+
+.form-check-input:checked {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+.form-text {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    margin-top: auto;
+    background: white;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+    border-top: none;
+}
+
+/* ============================================
+   ICONS
+   ============================================ */
 i {
     vertical-align: middle;
+    transition: var(--transition-smooth);
 }
 
-/* Responsive adjustments */
+.card:hover i {
+    transform: scale(1.1);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+.text-center .display-1 {
+    font-size: 5rem;
+    opacity: 0.3;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .text-center .display-1 {
+        animation: none;
+    }
+}
+
+/* ============================================
+   TASK COMPLETION STYLING
+   ============================================ */
+.text-decoration-line-through {
+    opacity: 0.6;
+    position: relative;
+}
+
+/* ============================================
+   FEATURE CARDS (HOME PAGE)
+   ============================================ */
+.row .col-md-4 .card {
+    border-top: 4px solid transparent;
+    transition: var(--transition-smooth);
+}
+
+.row .col-md-4:nth-child(1) .card {
+    border-top-color: #667eea;
+}
+
+.row .col-md-4:nth-child(2) .card {
+    border-top-color: #38ef7d;
+}
+
+.row .col-md-4:nth-child(3) .card {
+    border-top-color: #17a2b8;
+}
+
+.row .col-md-4 .card:hover {
+    border-top-width: 6px;
+}
+
+/* ============================================
+   LOADING & MICRO-INTERACTIONS
+   ============================================ */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
 @media (max-width: 768px) {
     .jumbotron {
-        padding: 2rem 1rem;
+        padding: 2.5rem 1.5rem;
     }
     
     .jumbotron .display-4 {
@@ -123,15 +475,56 @@ i {
     .jumbotron .lead {
         font-size: 1.1rem;
     }
+    
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
 }
 
-/* Empty state */
-.text-center .display-1 {
-    font-size: 5rem;
-    opacity: 0.5;
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+    
+    .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
 }
 
-/* Task completion styling */
-.text-decoration-line-through {
-    opacity: 0.6;
+/* ============================================
+   ACCESSIBILITY ENHANCEMENTS
+   ============================================ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 3px solid #667eea;
+    outline-offset: 3px;
+}
+
+/* ============================================
+   REDUCED MOTION PREFERENCES
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================
+   SMOOTH SCROLLING
+   ============================================ */
+html {
+    scroll-behavior: smooth;
 }
